@@ -1,28 +1,13 @@
 import {v1} from 'uuid';
 import {TodoListType} from '../App';
 import {
-    AddTodolistActionType, ChangeTodolistFilterActionType,
-    ChangeTodolistTitleActionType,
-    RemoveTodolistActionType,
+    AddTodolistAC,
+    ChangeTodolistFilterAC,
+    ChangeTodolistTitleAC,
+    RemoveTodolistAC,
     todoListsReducer
 } from "./todoLists-reducer";
 import {FilterValueType} from "../Todolist";
-
-export const RemoveTodolistAC = (todolistId1: string): RemoveTodolistActionType => {
-    return { type: 'REMOVE-TODOLIST', id: todolistId1}
-}
-
-export const AddTodolistAC = (newTodolistTitle: string): AddTodolistActionType => {
-    return { type: 'ADD-TODOLIST', title: newTodolistTitle}
-}
-
-export const ChangeTodolistTitleAC = (newTodolistTitle: string, todolistId2: string): ChangeTodolistTitleActionType => {
-    return { type: 'CHANGE-TODOLIST-TITLE', title: newTodolistTitle, id: todolistId2}
-}
-
-export const ChangeTodolistFilterAC = (newFilter: FilterValueType, todolistId2: string): ChangeTodolistFilterActionType => {
-    return { type: 'CHANGE-TODOLIST-FILTER', filter: newFilter, id: todolistId2}
-}
 
 test('correct todolist should be removed', () => {
     let todolistId1 = v1();
@@ -100,3 +85,4 @@ test('correct filter of todolist should be changed', () => {
     expect(endState[0].filter).toBe("all");
     expect(endState[1].filter).toBe(newFilter);
 });
+
