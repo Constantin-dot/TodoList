@@ -18,7 +18,9 @@ function EditableSpan(props: EditableSpanPropsType) {
         setEditMode(false);
         props.onChange(title);
     }
-    const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value);
+    const onChangeTitleHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value);
+    }
 
     return editMode
         ? <TextField

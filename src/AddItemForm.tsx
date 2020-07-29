@@ -10,7 +10,9 @@ function AddItemForm(props: AddItemFormPropsType) {
     let [title, setTitle] = useState<string>("");
     let [error, setError] = useState<string | null>(null);
 
-    const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => setTitle(e.currentTarget.value);
+    const onTitleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.currentTarget.value);
+    }
     const onAddTaskPress = (e: KeyboardEvent<HTMLInputElement>) => {
         setError(null);
         if(e.charCode === 13) {
