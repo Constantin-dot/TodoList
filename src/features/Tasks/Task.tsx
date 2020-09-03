@@ -1,12 +1,12 @@
 import {useDispatch} from "react-redux";
 import {
     removeTaskTC, updateTaskTC
-} from "./state/tasks-reducer";
+} from "./tasks-reducer";
 import React, {ChangeEvent, useCallback} from "react";
 import {Checkbox, IconButton} from "@material-ui/core";
-import {EditableSpan} from "./EditableSpan";
+import {EditableSpan} from "../../components/EditableSpan";
 import {Delete} from "@material-ui/icons";
-import {TaskStatuses, TaskType} from "./api/tasks-api";
+import {TaskStatuses, TaskType} from "../../api/tasks-api";
 
 type TaskPropsType = {
     task: TaskType
