@@ -61,7 +61,7 @@ export type GetTasksResponseType = {
 
 export type CommonTasksResponseType<D = {}> = {
     resultCode: number
-    message: Array<string>
+    messages: Array<string>
     data: D
 }
 

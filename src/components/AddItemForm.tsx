@@ -4,9 +4,10 @@ import {ControlPoint} from "@material-ui/icons";
 
 type AddItemFormPropsType = {
     addItem: (title: string) => void
+    disabled?: boolean
 }
 
-export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
+export const AddItemForm = React.memo(({addItem, disabled = false}: AddItemFormPropsType) => {
     let [title, setTitle] = useState("");
     let [error, setError] = useState<string | null>(null);
 
@@ -16,7 +17,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
 
     const onAddItemClick = () => {
         if(title.trim() !== "") {
-            props.addItem(title);
+            addItem(title);
         } else {
             setError("Field is empty!");
         }
@@ -35,6 +36,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
     return (
         <div>
             <TextField
+                disabled={disabled}
                 variant={'outlined'}
                 label={'New item'}
                 value={title}
@@ -44,6 +46,7 @@ export const AddItemForm = React.memo((props: AddItemFormPropsType) => {
                 helperText={error}
             />
             <IconButton
+                disabled={disabled}
                 onClick={onAddItemClick}
                 color={'primary'}
             >

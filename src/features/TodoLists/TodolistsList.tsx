@@ -13,13 +13,20 @@ import {AddItemForm} from "../../components/AddItemForm";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../../app/store";
 
-const TodolistsList = () => {
+type PropsType = {
+    demo?: boolean
+}
+
+const TodolistsList = ({demo = false}:PropsType) => {
     const dispatch = useDispatch();
     const todoLists = useSelector<AppRootState, Array<TodoListDomainType>>(
         state => state.todoLists
     );
 
     useEffect(() => {
+        if(demo) {
+            return
+        }
         dispatch(fetchTodoListsTC());
     }, [dispatch]);
 
@@ -52,12 +59,14 @@ const TodolistsList = () => {
                     return <Grid item key={tl.id}>
                         <Paper style={{padding: "10px"}}>
                             <Todolist
-                                title={tl.title}
-                                id={tl.id}
+                                // filter={tl.filter}
+                                // title={tl.title}
+                                // id={tl.id}
                                 changeFilter={changeFilter}
-                                filter={tl.filter}
+                                todoList={tl}
                                 removeTodoList={removeTodoList}
                                 changeTodoListTitle={changeTodoListTitle}
+                                demo={demo}
                             />
                         </Paper>
                     </Grid>
