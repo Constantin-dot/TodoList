@@ -14,13 +14,13 @@ export const tasksAPI = {
         return instance.get<GetTasksResponseType>(`todo-lists/${todoListId}/tasks`)
     },
     createTask(todoListId: string, title: string) {
-        return instance.post<CommonTasksResponseType<{item: TaskType}>>(`todo-lists/${todoListId}/tasks`, {title: title})
+        return instance.post<CommonResponseType<{item: TaskType}>>(`todo-lists/${todoListId}/tasks`, {title: title})
     },
     deleteTask(todoListId: string, taskId: string) {
-        return instance.delete<CommonTasksResponseType>(`todo-lists/${todoListId}/tasks/${taskId}`)
+        return instance.delete<CommonResponseType>(`todo-lists/${todoListId}/tasks/${taskId}`)
     },
     updateTask(taskId: string, model: UpdateTaskModelType, todoListId: string) {
-        return instance.put<CommonTasksResponseType<TaskType>>(`todo-lists/${todoListId}/tasks/${taskId}`, model)
+        return instance.put<CommonResponseType<TaskType>>(`todo-lists/${todoListId}/tasks/${taskId}`, model)
     },
 }
 
@@ -59,7 +59,7 @@ export type GetTasksResponseType = {
     items: TaskType[]
 }
 
-export type CommonTasksResponseType<D = {}> = {
+export type CommonResponseType<D = {}> = {
     resultCode: number
     messages: Array<string>
     data: D

@@ -1,8 +1,8 @@
 import {setAppErrorAC, setAppErrorActionType, setAppStatusAC, setAppStatusActionType} from "../app/app-reducer";
-import {CommonTasksResponseType} from "../api/tasks-api";
+import {CommonResponseType} from "../api/tasks-api";
 import {Dispatch} from "redux";
 
-export const handleServerAppError = <D>(data: CommonTasksResponseType<D>, dispatch: Dispatch<setAppErrorActionType
+export const handleServerAppError = <D>(data: CommonResponseType<D>, dispatch: Dispatch<setAppErrorActionType
     | setAppStatusActionType>) => {
         if(data.messages.length) {
             dispatch(setAppErrorAC(data.messages[0]))

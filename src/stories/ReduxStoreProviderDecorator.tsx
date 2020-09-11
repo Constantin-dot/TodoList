@@ -7,11 +7,13 @@ import {applyMiddleware, combineReducers, createStore} from "redux";
 import {TaskPriorities, TaskStatuses} from "../api/tasks-api";
 import {appReducer} from "../app/app-reducer";
 import thunk from "redux-thunk";
+import {authReducer} from "../features/login/auth-reducer";
 
 const rootReducer = combineReducers({
     todoLists: todoListsReducer,
     tasks: tasksReducer,
-    app: appReducer
+    app: appReducer,
+    auth: authReducer
 })
 
 const initialGlobalState: AppRootState = {
@@ -48,7 +50,11 @@ const initialGlobalState: AppRootState = {
     },
     app: {
         error: null,
-        status: "idle"
+        status: "idle",
+        isInitialized: true
+    },
+    auth: {
+        isLoggedIn: true
     }
 }
 

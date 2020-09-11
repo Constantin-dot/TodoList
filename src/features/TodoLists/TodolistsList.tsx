@@ -12,19 +12,21 @@ import {Todolist} from "./Todolist";
 import {AddItemForm} from "../../components/AddItemForm";
 import {useDispatch, useSelector} from "react-redux";
 import {AppRootState} from "../../app/store";
+import { Redirect } from 'react-router-dom';
 
 type PropsType = {
     demo?: boolean
 }
 
 const TodolistsList = ({demo = false}:PropsType) => {
+    const isLoggedIn = useSelector<AppRootState, boolean>(state => state.auth.isLoggedIn)
     const dispatch = useDispatch();
     const todoLists = useSelector<AppRootState, Array<TodoListDomainType>>(
         state => state.todoLists
     );
 
     useEffect(() => {
-        if(demo) {
+        if(demo || !isLoggedIn) {
             return
         }
         dispatch(fetchTodoListsTC());
@@ -48,6 +50,10 @@ const TodolistsList = ({demo = false}:PropsType) => {
         const thunk = addTodoListTC(title);
         dispatch(thunk);
     }, [dispatch]);
+
+    if (!isLoggedIn) {
+        return <Redirect to={"/login"}/>
+    }
 
     return  <>
         <Grid container style={{padding: "10px"}}>
