@@ -15,7 +15,7 @@ type PropsType = {
     // id: string
     // title: string
     // filter: FilterValuesType
-    changeFilter: (value: FilterValuesType, todoListId: string) => void
+    changeFilter: (filter: FilterValuesType, todoListId: string) => void
     removeTodoList: (id: string) => void
     changeTodoListTitle: (id: string, title: string) => void
     demo?: boolean
