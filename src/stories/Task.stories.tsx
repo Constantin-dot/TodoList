@@ -16,12 +16,12 @@ export default  {
 export const TaskBaseExample = () => {
     return <>
         <Task
-            task={ {id: '1', title: 'CSS',  description: "", status: TaskStatuses.New, priority: TaskPriorities.Hi,
+            task={ {id: '1', title: 'CSS',  description: "", status: TaskStatuses.Completed, priority: TaskPriorities.Hi,
                 startDate: "", deadline: "", order: 0, todoListId: "todoListId1", addedDate: ""}}
             todoListId={"todoListId1"}
         />
         <Task
-            task={ {id: '2', title: 'JS', description: "", status: TaskStatuses.Completed, priority: TaskPriorities.Hi,
+            task={ {id: '2', title: 'JS', description: "", status: TaskStatuses.New, priority: TaskPriorities.Hi,
                 startDate: "", deadline: "", order: 1, todoListId: "todoListId2", addedDate: ""}}
             todoListId={"todoListId2"}
         />

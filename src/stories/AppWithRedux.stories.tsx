@@ -1,11 +1,11 @@
 import React from "react";
 import App from "../app/App";
-import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
+import {BrowserRouterDecorator, ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
 
 export default  {
     title: 'App Component',
     component: App,
-    decorators: [ReduxStoreProviderDecorator]
+    decorators: [ReduxStoreProviderDecorator, BrowserRouterDecorator]
 }
 
 export const AppWithReduxBaseExample = () => {

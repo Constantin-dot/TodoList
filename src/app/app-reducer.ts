@@ -3,9 +3,14 @@ import {authAPI} from "../api/auth-api";
 import {setIsLoggedInAC} from "../features/login/auth-reducer";
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-const initialState = {
-    status: 'idle' as RequestStatusType,
-    error: null as string | null,
+export type InitialStateType = {
+    status: RequestStatusType
+    error: string | null
+    isInitialized: boolean
+}
+const initialState: InitialStateType = {
+    status: 'idle',
+    error: null,
     isInitialized: false
 }
 
