@@ -1,10 +1,6 @@
-import {
-    addTaskAC,
-    updateTaskAC,
-    tasksReducer,
-    TasksStateType, fetchTasksTC, removeTaskTC
+import {tasksReducer, TasksStateType, fetchTasksTC, removeTaskTC, addTaskTC, updateTaskTC
 } from "./tasks-reducer";
-import {addTodoListAC, removeTodoListAC, setTodoListsAC} from "../TodoLists/todoLists-reducer";
+import {addTodoListAC, fetchTodoListsTC, removeTodoListTC} from "../TodoLists/todoLists-reducer";
 import {TaskPriorities, TaskStatuses} from "../../api/tasks-api";
 
 let startState: TasksStateType = {};
@@ -41,8 +37,7 @@ test('correct task should be deleted from correct array', () => {
 });
 
 test('correct task should be added to correct array', () => {
-
-    const action = addTaskAC({
+    const task = {
         todoListId: "todoListId2",
         title: "juice",
         status: TaskStatuses.New,
@@ -53,7 +48,8 @@ test('correct task should be added to correct array', () => {
         priority: 0,
         startDate: "",
         id: "id",
-    });
+    }
+    const action = addTaskTC.fulfilled(task, "requestId", {title: task.title, todoListId: task.todoListId});
     const endState = tasksReducer(startState, action);
 
     expect(endState["todoListId1"].length).toBe(3);
@@ -65,8 +61,8 @@ test('correct task should be added to correct array', () => {
 
 test('status of specified task should be changed', () => {
 
-    const action = updateTaskAC({taskId: "2", model:
-            {status: TaskStatuses.Completed}, todoListId: "todoListId2"});
+    let updateModel = {taskId: "2", model: {status: TaskStatuses.Completed}, todoListId: "todoListId2"};
+    const action = updateTaskTC.fulfilled(updateModel, "requestId", updateModel);
     const endState = tasksReducer(startState, action);
 
 
@@ -75,11 +71,9 @@ test('status of specified task should be changed', () => {
 });
 
 test('title of specified task should be changed', () => {
-
-    const action = updateTaskAC({taskId: "2", model:
-            {title: "MilkyWay"}, todoListId: "todoListId2"});
+    let updateModel = {taskId: "2", model: {title: "MilkyWay"}, todoListId: "todoListId2"}
+    const action = updateTaskTC.fulfilled(updateModel, "requestId",updateModel);
     const endState = tasksReducer(startState, action);
-
 
     expect(endState["todoListId2"][1].title).toBe("MilkyWay");
     expect(endState["todoListId1"][1].title).toBe("JS");
@@ -107,7 +101,7 @@ test('new property with new array should be added when new todoList is added', (
 
 test('property with todoListId should be deleted', () => {
 
-    const action = removeTodoListAC({todoListId: "todoListId2"});
+    const action = removeTodoListTC.fulfilled({todoListId: "todoListId2"}, "requestId", "todoListId2");
     const endState = tasksReducer(startState, action);
 
     const keys = Object.keys(endState);
@@ -117,10 +111,10 @@ test('property with todoListId should be deleted', () => {
 });
 
 test('empty arrays should be added when we set todoLists', () => {
-    const action = setTodoListsAC({todoLists: [
+    const action = fetchTodoListsTC.fulfilled({todoLists: [
         {id: "1", title: "title1", order: 0, addedDate: ""},
         {id: "2", title: "title2", order: 1, addedDate: ""}
-    ]})
+    ]}, "requestId")
 
     const endState = tasksReducer({}, action)
 

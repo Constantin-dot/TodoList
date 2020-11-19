@@ -30,26 +30,26 @@ const TodolistsList = ({demo = false}:PropsType) => {
             return
         }
         dispatch(fetchTodoListsTC());
-    }, [dispatch]);
+    }, []);
 
     const changeTodoListTitle = useCallback((id: string, title: string) => {
-        const thunk = changeTodoListTitleTC(id, title)
+        const thunk = changeTodoListTitleTC({id, title})
         dispatch(thunk)
-    }, [dispatch]);
+    }, []);
 
     const changeFilter = useCallback((filter: FilterValuesType, todoListId: string) => {
         dispatch(changeTodoListFilterAC({filter, id: todoListId}));
-    }, [dispatch]);
+    }, []);
 
     const removeTodoList = useCallback ((id: string) => {
         const thunk = removeTodoListTC(id)
         dispatch(thunk);
-    }, [dispatch]);
+    }, []);
 
     const addTodoList = useCallback((title: string) => {
         const thunk = addTodoListTC(title);
         dispatch(thunk);
-    }, [dispatch]);
+    }, []);
 
     if (!isLoggedIn) {
         return <Redirect to={"/login"}/>

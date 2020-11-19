@@ -37,8 +37,8 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
     );
 
     const addTask = useCallback( (title: string) => {
-        dispatch(addTaskTC(title, props.todoList.id));
-    }, [dispatch, props])
+        dispatch(addTaskTC({title, todoListId: props.todoList.id}));
+    }, [])
 
     const onAllClickHandler = useCallback(
         () => props.changeFilter("all", props.todoList.id), [props]

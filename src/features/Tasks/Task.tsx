@@ -24,14 +24,12 @@ export const Task = React.memo((props: TaskPropsType) => {
     const onStatusChangeHandler = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         let newIsDoneValue = e.currentTarget.checked;
         let status = newIsDoneValue ? TaskStatuses.Completed : TaskStatuses.New;
-        const thunk = updateTaskTC(props.task.id,
-            {status},
-            props.todoListId)
+        const thunk = updateTaskTC({taskId: props.task.id, model:{status}, todoListId: props.todoListId })
         dispatch(thunk);
     }, [])
 
     const onTitleChangeHandler = useCallback((newTitle: string) => {
-        dispatch(updateTaskTC(props.task.id, {title: newTitle}, props.todoListId));
+        dispatch(updateTaskTC({taskId: props.task.id, model: {title: newTitle}, todoListId: props.todoListId}));
     }, [])
 
     return (
