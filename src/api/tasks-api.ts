@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "axios"
+import {CommonResponseType, GetTasksResponseType, TaskType, UpdateTaskModelType} from "./types"
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.1/`,
@@ -8,7 +9,6 @@ const instance = axios.create({
     }
 })
 
-// api
 export const tasksAPI = {
     getTasks(todoListId: string) {
         return instance.get<GetTasksResponseType>(`todo-lists/${todoListId}/tasks`)
@@ -22,59 +22,4 @@ export const tasksAPI = {
     updateTask(taskId: string, model: UpdateTaskModelType, todoListId: string) {
         return instance.put<CommonResponseType<TaskType>>(`todo-lists/${todoListId}/tasks/${taskId}`, model)
     },
-}
-
-// types
-export enum TaskStatuses {
-    New,
-    InProgress,
-    Completed,
-    Draft
-}
-
-export enum TaskPriorities {
-    Low,
-    Middle,
-    Hi,
-    Uregently,
-    Later
-}
-
-export type TaskType = {
-    description: string
-    title: string
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
-    id: string
-    todoListId: string
-    order: number
-    addedDate: string
-}
-
-export type GetTasksResponseType = {
-    error: string | null
-    totalCount: number
-    items: TaskType[]
-}
-export type FieldErrorType = {
-    field: string
-    error: string
-}
-
-export type CommonResponseType<D = {}> = {
-    resultCode: number
-    messages: Array<string>
-    fieldsErrors?: Array<FieldErrorType>
-    data: D
-}
-
-export type UpdateTaskModelType = {
-    description: string
-    title: string
-    status: TaskStatuses
-    priority: TaskPriorities
-    startDate: string
-    deadline: string
 }

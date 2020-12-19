@@ -1,4 +1,5 @@
-import axios from "axios";
+import axios from "axios"
+import {CommonTodoListResponseType, TodoListType} from "./types"
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.1/`,
@@ -8,7 +9,6 @@ const instance = axios.create({
     }
 })
 
-// api
 export const todoListsAPI = {
     getTodoLists() {
         return instance.get<Array<TodoListType>>(`todo-lists`)
@@ -22,18 +22,4 @@ export const todoListsAPI = {
     updateTodoList(todoListId: string, title: string) {
         return instance.put<CommonTodoListResponseType>(`todo-lists/${todoListId}`, {title: title})
     }
-}
-
-// types
-export type TodoListType = {
-    id: string
-    title: string
-    addedDate: string
-    order: number
-}
-
-export type CommonTodoListResponseType<D = {}> = {
-    resultCode: number
-    message: Array<string>
-    data: D
 }

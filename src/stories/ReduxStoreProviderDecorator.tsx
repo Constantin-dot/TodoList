@@ -1,20 +1,20 @@
-import {Provider} from "react-redux";
-import {AppRootState, RootReducerType} from "../app/store";
-import React from "react";
-import {todoListsReducer} from "../features/TodoLists/todoLists-reducer";
-import {tasksReducer} from "../features/Tasks/tasks-reducer";
-import {combineReducers} from "redux";
-import {TaskPriorities, TaskStatuses} from "../api/tasks-api";
-import {appReducer} from "../app/app-reducer";
-import {authReducer} from "../features/login/auth-reducer";
-import {configureStore} from "@reduxjs/toolkit";
-import thunkMiddleware from "redux-thunk";
-import {HashRouter} from "react-router-dom";
+import {Provider} from "react-redux"
+import React from "react"
+import {todoListsReducer} from "../features/todoLists"
+import {tasksReducer} from "../features/tasks"
+import {combineReducers} from "redux"
+import {TaskPriorities, TaskStatuses} from "../api/types"
+import {applicationReducer} from "../features/application"
+import {authReducer} from "../features/auth"
+import {configureStore} from "@reduxjs/toolkit"
+import thunkMiddleware from "redux-thunk"
+import {HashRouter} from "react-router-dom"
+import {AppRootState, RootReducerType} from "../utils/types";
 
 const rootReducer: RootReducerType = combineReducers({
     todoLists: todoListsReducer,
     tasks: tasksReducer,
-    app: appReducer,
+    application: applicationReducer,
     auth: authReducer
 })
 
@@ -50,7 +50,7 @@ const initialGlobalState: AppRootState = {
                 order: 0, priority: TaskPriorities.Low, description: "", addedDate: ""},
         ]
     },
-    app: {
+    application: {
         error: null,
         status: "succeeded",
         isInitialized: true

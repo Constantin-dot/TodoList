@@ -1,7 +1,7 @@
 import React from "react";
-import {Task} from "../features/Tasks/Task";
+import {Task} from "../features/tasks/Task";
 import {ReduxStoreProviderDecorator} from "./ReduxStoreProviderDecorator";
-import {TaskPriorities, TaskStatuses} from "../api/tasks-api";
+import {TaskPriorities, TaskStatuses} from "../api/types";
 
 export default  {
     title: 'Task Component',

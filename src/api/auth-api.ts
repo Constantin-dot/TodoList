@@ -1,5 +1,5 @@
-import axios from "axios";
-import {CommonResponseType} from "./tasks-api";
+import axios from "axios"
+import {CommonResponseType, LoginParamsType} from "./types"
 
 const instance = axios.create({
     baseURL: `https://social-network.samuraijs.com/api/1.1/`,
@@ -9,7 +9,6 @@ const instance = axios.create({
     }
 })
 
-// api
 export const authAPI = {
     login(data: LoginParamsType) {
         const promise = instance.post<CommonResponseType<{userId?: number}>>(`auth/login`, data)
@@ -21,12 +20,4 @@ export const authAPI = {
     logout() {
         return instance.delete<CommonResponseType<{userId?: number}>>(`auth/login`)
     }
-}
-
-// types
-export type LoginParamsType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha?: string
 }

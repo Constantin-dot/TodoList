@@ -2,7 +2,7 @@ import React, { useState} from "react";
 import {tasksAPI} from "../api/tasks-api";
 
 export default {
-    title: 'Tasks-API'
+    title: 'tasks-API'
 }
 
 export const GetTasks = () => {
