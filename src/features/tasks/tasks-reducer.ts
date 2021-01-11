@@ -59,7 +59,7 @@ const removeTask = createAsyncThunk<{todoListId: string, taskId: string}, {todoL
     })
 
 const updateTask = createAsyncThunk("tasks/updateTask",
-    async (param: { taskId: string, model: UpdateDomainTaskModelType, todoListId: string }, thunkAPI) => {
+    async (param: { taskId: string, model: UpdateDomainTaskModelType, todoListId: string } , thunkAPI) => {
         thunkAPI.dispatch(applicationActions.setAppStatus({status: 'loading'}))
         const state = thunkAPI.getState() as AppRootState
         const task = state.tasks[param.todoListId].find(t => t.id === param.taskId)

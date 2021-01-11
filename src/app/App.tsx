@@ -15,11 +15,9 @@ import {authSelectors} from "../features/auth"
 import {TodolistsList} from "../features/todoLists"
 import {useActions} from "../utils/redux-utils"
 
-type PropsType = {
-    demo?: boolean
-}
+type PropsType = {}
 
-function App({demo = false}: PropsType) {
+function App() {
     const {logout} = useActions(authActions)
     const {initializeApp} = useActions(applicationActions)
     const status = useSelector(selectStatus)
@@ -27,7 +25,7 @@ function App({demo = false}: PropsType) {
     const isLoggedIn = useSelector(authSelectors.selectIsLoggedIn)
 
     useEffect(() => {
-        if (!demo) {
+        if (!isInitialized) {
             initializeApp()
         }
     }, [])
@@ -63,7 +61,7 @@ function App({demo = false}: PropsType) {
             </AppBar>
             <Container fixed>
                 <Route
-                    exact path={"/"} render={() => <TodolistsList demo={demo}/>}
+                    exact path={"/"} render={() => <TodolistsList demo={false}/>}
                 />
                 <Route
                     path={"/auth"} render={() => <Login/>}

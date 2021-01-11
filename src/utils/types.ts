@@ -1,5 +1,6 @@
 import {FieldErrorType} from "../api/types"
-import {rootReducer, store} from "../app/store"
+import {store} from "../app/store"
+import {rootReducer} from "../app/reducers";
 
 export type RootReducerType = typeof rootReducer
 

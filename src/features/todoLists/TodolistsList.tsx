@@ -44,7 +44,9 @@ export const TodolistsList = ({demo = false}:PropsType) => {
         if(demo || !isLoggedIn) {
             return
         }
-        fetchTodoLists()
+        if (!todoLists.length) {
+            fetchTodoLists()
+        }
     }, [])
 
     if (!isLoggedIn) {

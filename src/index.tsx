@@ -7,15 +7,26 @@ import {Provider} from "react-redux";
 import {store} from "./app/store";
 import {BrowserRouter} from "react-router-dom";
 
+const rerenderEntireTree = () => {
+    ReactDOM.render(
+        <Provider store={store}>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </Provider>
+        , document.getElementById('root')
+    )
+}
 
-ReactDOM.render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>
-    , document.getElementById('root')
-);
+rerenderEntireTree()
 
+if (process.env.NODE_ENV === "development" && module.hot) {
+    module.hot.accept("./app/App", () => {
+        rerenderEntireTree()
+    })
+    module.hot.accept("./app/store", () => {
+        rerenderEntireTree()
+    })
+}
 
-serviceWorker.unregister();
+serviceWorker.unregister()

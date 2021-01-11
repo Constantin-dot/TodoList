@@ -21,16 +21,20 @@ export const Todolist = React.memo(({demo = false, ...props}: PropsType) => {
     const {fetchTasks} = useActions(tasksActions)
     const dispatch = useAppDispatch()
 
+    const tasks = useSelector<AppRootState, Array<TaskType>>(
+        state => state.tasks[props.todoList.id]
+    )
+
     useEffect(() => {
         if(demo) {
             return
         }
-        fetchTasks(props.todoList.id)
+        if (!tasks.length) {
+            fetchTasks(props.todoList.id)
+        }
     }, [])
 
-    const tasks = useSelector<AppRootState, Array<TaskType>>(
-        state => state.tasks[props.todoList.id]
-    )
+
 
     const addTaskCallback = useCallback(async (title: string, helper: AddItemFormSubmitHelperType) => {
         let thunk = tasksActions.addTask({title, todoListId: props.todoList.id})
